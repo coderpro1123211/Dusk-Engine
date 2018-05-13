@@ -27,16 +27,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
-      <Filter>core\header</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Window.cpp">
+    <ClCompile Include="src\core\Window.cpp">
       <Filter>core\src</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>core</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\Window.h">
+      <Filter>core\header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
