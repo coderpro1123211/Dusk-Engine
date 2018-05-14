@@ -31,7 +31,12 @@ void Dusk::Core::Logger::Log(char * msg, char * func, int severity)
 
 	vector<string> v = split(func, "::");
 
-	cout << "[" << "" << "]: " << msg << endl; //TODO: Fix this
+#ifdef LOG_VERBOSE
+	cout << "[" << v[v.size()-2] << v[v.size()-1] << "]: " << msg << endl; //TODO: Fix this
+#else
+	cout << "[" << v[v.size() - 2] << "]: " << msg << endl; //TODO: Fix this
+#endif // LOG_VERBOSE
+
 }
 
 void Dusk::Core::Logger::InternalLog(char * msg, char * func)
