@@ -2,6 +2,7 @@
 #include "fbxsdk/fileio/fbxiosettings.h"
 #include "ModelLoader.h"
 #include "../maths/Vector3.h"
+#include "../core/Logger.h"
 #include "Mesh.h"
 #include <iostream>
 
@@ -51,9 +52,16 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 				std::cout << "FATAL! NORMAL COULD NOT BE READ" << std::endl;
 			}
 
-			std::cout << "POINT: " << index << " : " << iPoly << "-" << iVert << std::endl;
-			std::cout << "\tVERTEX: " << v[0] << " " << v[1] << " " << v[2] << std::endl;
-			std::cout << "\tNORMAL: " << n[0] << " " << n[1] << " " << n[2] << std::endl;
+			char buf[512];
+			_snprintf_s(buf, 512, "POINT: %d:%d-%d", index, iPoly, iVert);
+			LogMessage(buf);
+			memset(buf, 0, sizeof(buf));
+			_snprintf_s(buf, 512, "\tVERTEX: %f : %f : %f", v[0], v[1], v[2]);
+			LogMessage(buf);
+			memset(buf, 0, sizeof(buf));
+			_snprintf_s(buf, 512, "\tNORMAL: %f : %f : %f", n[0], n[1], n[2]);
+			LogMessage(buf);
+			memset(buf, 0, sizeof(buf));
 		}
 	}
 
