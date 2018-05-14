@@ -51,4 +51,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Dependencies\libfbx\vs2015\x64\debug\libfbxsdk.dll" />
+  </ItemGroup>
 </Project>

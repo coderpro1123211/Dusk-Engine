@@ -16,8 +16,13 @@ Dusk::Core::Window::Window(int w, int h)
 void Dusk::Core::Window::Repaint(Mesh* meshes)
 {
 	//TODO: Drawing code for window here
+	glClearColor(0,0,0.3,1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_TRIANGLES);
+
+	glVertex3f(0, 0, 0);
+	glVertex3f(1, 0, 0);
+	glVertex3f(0, 1, 0);
 
 	glEnd();
 	glfwSwapBuffers(this->m_Window);
@@ -26,5 +31,7 @@ void Dusk::Core::Window::Repaint(Mesh* meshes)
 bool Dusk::Core::Window::PollEvents()
 {
 	glfwPollEvents();
-	return glfwWindowShouldClose(this->m_Window);
+	bool sC = glfwWindowShouldClose(this->m_Window);
+	if (sC) glfwDestroyWindow(this->m_Window);
+	return sC;
 }
