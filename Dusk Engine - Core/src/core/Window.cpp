@@ -1,9 +1,9 @@
 #include "Window.h"
 #include "GLFW/glfw3.h"
-#include "../drawing/Mesh.h"
+#include "../graphics/Mesh.h"
 
 using namespace Dusk::Core;
-using namespace Dusk::Drawing;
+using namespace Dusk::Graphics;
 
 Dusk::Core::Window::Window(int w, int h)
 {
@@ -13,7 +13,7 @@ Dusk::Core::Window::Window(int w, int h)
 	glfwMakeContextCurrent(this->m_Window);
 }
 
-void Dusk::Core::Window::Repaint(Mesh* meshes)
+void Dusk::Core::Window::Repaint(Mesh* meshes, int meshesLen)
 {
 	//TODO: Drawing code for window here
 	glClearColor(0,0,0.3,1);

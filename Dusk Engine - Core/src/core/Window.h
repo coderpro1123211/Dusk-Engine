@@ -1,20 +1,20 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#include "../drawing/Mesh.h"
+#include "../graphics/Mesh.h"
 
-using namespace Dusk::Drawing;
+using namespace Dusk::Graphics;
 
 namespace Dusk { namespace Core {
 	class Window {
 		public:
 			Window (int,int);
-			void Repaint(Mesh* meshes);
+			void Repaint(Mesh*, int);
 			bool PollEvents();
 			int Width, Height;
 			char* Title;
 		private:
 			GLFWwindow* m_Window;
 			int m_Width, m_Height;
-			char* m_Title[];
+			char* m_Title;
 	};
 } }
