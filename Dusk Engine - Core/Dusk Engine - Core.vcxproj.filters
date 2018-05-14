@@ -33,10 +33,22 @@
     <ClCompile Include="Main.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="src\drawing\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maths\Vector3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Window.h">
       <Filter>core\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\drawing\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\maths\Vector3.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

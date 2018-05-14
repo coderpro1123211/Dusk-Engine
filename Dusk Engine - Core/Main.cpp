@@ -13,6 +13,10 @@ int main() {
 
 	Dusk::Core::Window* w = new Dusk::Core::Window(800, 600);
 
+	while (!w->PollEvents()) {
+		w->Repaint(nullptr);
+	}
+
 	system("PAUSE");
 	return 0;
 }
