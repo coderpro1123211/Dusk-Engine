@@ -36,24 +36,25 @@ void Dusk::Core::Logger::Log(char * msg, char * func, int severity, va_list argp
 
 	vector<string> v = split(func, "::");
 
-	switch(severity) {
-		case 0: //Normal log, just debug info
+	switch (severity) {
+	case 0: //Normal log, just debug info
 #ifdef LOG_VERBOSE
-	cout << "[" << v[v.size()-2] << v[v.size()-1] << "]: " << dest << endl;
+		cout << "[" << v[v.size() - 2] << v[v.size() - 1] << "]: " << dest << endl;
 #else
-	cout << "[" << v[v.size() - 2] << "]: " << dest << endl;
+		cout << "[" << v[v.size() - 2] << "]: " << dest << endl;
 #endif // LOG_VERBOSE
 		break;
-		case 1: //Warning, print class name. //TODO: Change color of warning text to yellow
-			cout << "[" << v[v.size()-2] << "::" << v[v.size()-1] << "]: " << dest << endl;
-			break;
-		case 2: //Error, //TODO: Print short stack trace
-		case 3:
-			cout << "[" << func << "]:" << endl;
-			cout << "FATAL ERROR: " << dest << endl << "Stack trace:" << endl << "/*STACK TRACE HERE*/" << endl;
-			if (severity == 3) exit(1);//Fatal error, terminate program with stacktrace
+	case 1: //Warning, print class name. //TODO: Change color of warning text to yellow
+		cout << "[" << v[v.size() - 2] << "::" << v[v.size() - 1] << "]: " << dest << endl;
+		break;
+	case 2: //Error, //TODO: Print short stack trace
+	case 3:
+		cout << "[" << func << "]:" << endl;
+		if (severity == 3) cout << "\tFATAL ";
+		else cout << "\t";
+		cout << "ERROR: " << dest << endl << "Stack trace:" << endl << "/*STACK TRACE HERE*/" << endl;
+		if (severity == 3) exit(1);//Fatal error, terminate program with stacktrace
 	}
-
 }
 
 void Dusk::Core::Logger::InternalLog(char * msg, char * func, ...)

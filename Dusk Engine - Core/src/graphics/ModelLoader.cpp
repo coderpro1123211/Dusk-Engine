@@ -56,7 +56,7 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 			FbxVector4 nn;
 			bool sN = m->GetPolygonVertexNormal(iPoly, iVert, nn);
 			if (!sN) {
-				LogError("FATAL: NORMAL COULD NOT BE READ FOR POLY %d-%d", iPoly, iVert);
+				LogError("NORMAL COULD NOT BE READ FOR POLY %d-%d", iPoly, iVert);
 			}
 			n.push_back(nn);
 			LogMessage("POINT: %d:%d-%d", index, iPoly, iVert);
