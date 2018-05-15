@@ -2,6 +2,7 @@
 #include <iostream>
 #include <regex>
 #include <vector>
+#include <stdarg.h>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ vector<string> split(const string& str, const string& delim)
 	return tokens;
 }
 
-void Dusk::Core::Logger::Log(char * msg, char * func, int severity)
+void Dusk::Core::Logger::Log(char * msg, char * func, int severity, va_list argptr)
 {
 	//std::cmatch cm;    // same as std::match_results<const char*> cm;
 	//std::regex_match(func, cm, std::regex("\\w+\\s*::\\s*\\w+\\s*\\(.+\\)", std::regex_constants::ECMAScript));
@@ -29,32 +30,48 @@ void Dusk::Core::Logger::Log(char * msg, char * func, int severity)
 	//std::cout << cm.length() << std::endl;
 	//std::cout << cm.str() << std::endl;
 
+	char dest[1024 * 16];
+	memset(&dest, 0, 1024 * 16);
+	vsnprintf(dest, 1024*16, msg, argptr);
+
 	vector<string> v = split(func, "::");
 
 #ifdef LOG_VERBOSE
-	cout << "[" << v[v.size()-2] << v[v.size()-1] << "]: " << msg << endl; //TODO: Fix this
+	cout << "[" << v[v.size()-2] << v[v.size()-1] << "]: " << dest << endl;
 #else
-	cout << "[" << v[v.size() - 2] << "]: " << msg << endl; //TODO: Fix this
+	cout << "[" << v[v.size() - 2] << "]: " << dest << endl;
 #endif // LOG_VERBOSE
 
 }
 
-void Dusk::Core::Logger::InternalLog(char * msg, char * func)
+void Dusk::Core::Logger::InternalLog(char * msg, char * func, ...)
 {
-	Log(msg, func, 0);
+	va_list argptr;
+	va_start(argptr, func);
+	Log(msg, func, 0, argptr);
+	va_end(argptr);
 }
 
-void Dusk::Core::Logger::InternalLogWarning(char * msg, char * func)
+void Dusk::Core::Logger::InternalLogWarning(char * msg, char * func, ...)
 {
-	Log(msg, func, 1);
+	va_list argptr;
+	va_start(argptr, func);
+	Log(msg, func, 1, argptr);
+	va_end(argptr);
 }
 
-void Dusk::Core::Logger::InternalLogError(char * msg, char * func)
+void Dusk::Core::Logger::InternalLogError(char * msg, char * func, ...)
 {
-	Log(msg, func, 2);
+	va_list argptr;
+	va_start(argptr, func);
+	Log(msg, func, 2, argptr);
+	va_end(argptr);
 }
 
-void Dusk::Core::Logger::InternalLogFatal(char * msg, char * func)
+void Dusk::Core::Logger::InternalLogFatal(char * msg, char * func, ...)
 {
-	Log(msg, func, 3);
+	va_list argptr;
+	va_start(argptr, msg);
+	Log(msg, func, 3, argptr);
+	va_end(argptr);
 }

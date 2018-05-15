@@ -5,6 +5,7 @@
 #include "../core/Logger.h"
 #include "Mesh.h"
 #include <iostream>
+#include <vector>
 
 Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNormals)
 {
@@ -41,30 +42,33 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 
 	m->GenerateNormals();
 
+	std::vector<Vector3> verts = std::vector<Vector3>();
+	std::vector<Vector3> normals = std::vector<Vector3>();
+
 	for (int iPoly = 0; iPoly < m->GetPolygonCount(); iPoly++) {
+		std::vector<FbxVector4> v = std::vector<FbxVector4>();
+		std::vector<FbxVector4> n = std::vector<FbxVector4>();
 		for (int iVert = 0; iVert < m->GetPolygonSize(iPoly); iVert++)
 		{
 			int index = m->GetPolygonVertex(iPoly, iVert);
-			FbxVector4 v = m->GetControlPointAt(index);
-			FbxVector4 n;
-			bool sN = m->GetPolygonVertexNormal(iPoly, iVert, n);
+			FbxVector4 vv = m->GetControlPointAt(index);
+			v.push_back(vv);
+			FbxVector4 nn;
+			bool sN = m->GetPolygonVertexNormal(iPoly, iVert, nn);
 			if (!sN) {
-				std::cout << "FATAL! NORMAL COULD NOT BE READ" << std::endl;
+				LogError("FATAL: NORMAL COULD NOT BE READ FOR POLY %d-%d", iPoly, iVert);
 			}
-
-			char buf[512];
-			_snprintf_s(buf, 512, "POINT: %d:%d-%d", index, iPoly, iVert);
-			LogMessage(buf);
-			memset(buf, 0, sizeof(buf));
-			_snprintf_s(buf, 512, "\tVERTEX: %f : %f : %f", v[0], v[1], v[2]);
-			LogMessage(buf);
-			memset(buf, 0, sizeof(buf));
-			_snprintf_s(buf, 512, "\tNORMAL: %f : %f : %f", n[0], n[1], n[2]);
-			LogMessage(buf);
-			memset(buf, 0, sizeof(buf));
+			n.push_back(nn);
+			LogMessage("POINT: %d:%d-%d", index, iPoly, iVert);
+			LogMessage("\tVERTEX: %f : %f : %f", vv[0], vv[1], vv[2]);
+			LogMessage("\tNORMAL: %f : %f : %f", nn[0], nn[1], nn[2]);
+		}
+		for (int i = 0; i < 3; i++) {
+			verts.push_back(Vector3(v[i][0], v[i][1], v[i][2]));
+			normals.push_back(Vector3(n[i][0], n[i][1], n[i][2]));
 		}
 	}
 
 
-	return nullptr;//new Mesh();
+	return new Mesh(&verts[0], verts.size(), &normals[0], normals.size(), nullptr, NULL);
 }

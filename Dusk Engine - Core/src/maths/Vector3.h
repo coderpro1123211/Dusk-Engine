@@ -4,10 +4,10 @@ namespace Dusk {
 	namespace Maths {
 		class Vector3 {
 		public:
-			Vector3(float x, float y, float z);
-			float x, y, z;
+			Vector3(double x, double y, double z);
+			double x, y, z;
 		private:
-			float m_C[];
+			double m_C[];
 		};
 	}
 }
