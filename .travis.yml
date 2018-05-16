@@ -1,0 +1,8 @@
+language: cpp
+compiler: gcc
+script:
+  - echo "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+  - echo "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+  - sudo apt-get update
+  - sudo apt-get install libglfw3 libglfw3-dev
+  - gcc 
