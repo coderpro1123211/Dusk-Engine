@@ -17,7 +17,7 @@ int main() {
 	std::cout << "GLFW Initialized" << std::endl;
 
 	Dusk::Core::Window* w = new Dusk::Core::Window(800, 600);
-	Dusk::Graphics::ModelLoader::Load("C:\\Users\\sax\\Desktop\\Dusk Engine\\Dusk Engine\\x64\\Debug\\test.fbx", false);
+	Dusk::Graphics::Mesh* m = Dusk::Graphics::ModelLoader::Load("C:\\Users\\sax\\Desktop\\Dusk Engine\\Dusk Engine\\x64\\Debug\\test.fbx", false);
 
 	//FbxManager *lSdkManager = FbxManager::Create();
 	//FbxIOSettings * ios = FbxIOSettings::Create(lSdkManager, IOSROOT);
@@ -45,7 +45,7 @@ int main() {
 	//lImporter->Destroy();
 
 	while (!w->PollEvents()) {
-		w->Repaint(nullptr, 0);
+		w->Repaint(m, 1);
 	}
 
 	system("PAUSE");

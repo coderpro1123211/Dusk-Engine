@@ -7,7 +7,7 @@ namespace Dusk {
 			Vector3(double x, double y, double z);
 			double x, y, z;
 		private:
-			double m_C[];
+			double m_C[3];
 		};
 	}
 }

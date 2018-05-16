@@ -16,7 +16,8 @@ Dusk::Core::Window::Window(int w, int h)
 void Dusk::Core::Window::Repaint(Mesh* meshes, int meshesLen)
 {
 	//TODO: Drawing code for window here
-	glClearColor(0,0,0.3,1);
+	glClearColor(0, 0, 0.3f, 1);
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_TRIANGLES);
 
