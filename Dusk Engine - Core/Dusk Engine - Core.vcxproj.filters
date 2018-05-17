@@ -33,9 +33,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="src\maths\Vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,13 +42,16 @@
     <ClCompile Include="src\core\Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\rendering\UnlitRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\DeferredRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Window.h">
       <Filter>core\header</Filter>
-    </ClInclude>
-    <ClInclude Include="src\maths\Vector3.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\Mesh.h">
       <Filter>Header Files</Filter>
@@ -60,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\core\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\UnlitRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rendering\DeferredRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

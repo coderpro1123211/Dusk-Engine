@@ -1,17 +1,15 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#include "../maths/Vector3.h"
-
-using namespace Dusk::Maths;
+#include "glm/vec4.hpp"
 
 namespace Dusk {
 	namespace Graphics {
 		class Mesh {
 		public:
-			Mesh(Vector3* vert, int vertLen, Vector3* nrm, int nrmLen, int* index, int indexLen);
+			Mesh(glm::vec4* vert, int vertLen, glm::vec4* nrm, int nrmLen, int* index, int indexLen);
 			int* index;
-			Vector3* verts;
-			Vector3* normals;
+			glm::vec4* verts;
+			glm::vec4* normals;
 
 			int indexLen;
 			int vertsLen;

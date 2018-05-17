@@ -1,8 +1,8 @@
 #include "fbxsdk.h"
 #include "fbxsdk/fileio/fbxiosettings.h"
 #include "ModelLoader.h"
-#include "../maths/Vector3.h"
 #include "../core/Logger.h"
+#include "glm/vec4.hpp"
 #include "Mesh.h"
 #include <iostream>
 #include <vector>
@@ -42,8 +42,8 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 
 	m->GenerateNormals();
 
-	std::vector<Vector3> verts = std::vector<Vector3>();
-	std::vector<Vector3> normals = std::vector<Vector3>();
+	std::vector<glm::vec4> verts = std::vector<glm::vec4>();
+	std::vector<glm::vec4> normals = std::vector<glm::vec4>();
 
 	for (int iPoly = 0; iPoly < m->GetPolygonCount(); iPoly++) {
 		std::vector<FbxVector4> v = std::vector<FbxVector4>();
@@ -64,8 +64,8 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 			LogMessage("\tNORMAL: %f : %f : %f", nn[0], nn[1], nn[2]);
 		}
 		for (int i = 0; i < 3; i++) {
-			verts.push_back(Vector3(v[i][0], v[i][1], v[i][2]));
-			normals.push_back(Vector3(n[i][0], n[i][1], n[i][2]));
+			verts.push_back(glm::vec4(v[i][0], v[i][1], v[i][2], 1));
+			normals.push_back(glm::vec4(n[i][0], n[i][1], n[i][2], 1));
 		}
 	}
 
