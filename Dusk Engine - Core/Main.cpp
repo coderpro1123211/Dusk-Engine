@@ -33,6 +33,7 @@ int main() {
 
 	std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
 	std::cout << "GLSL Version   : " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl << std::endl;
+	std::cout << "Graphics Card  : " << glGetString(GL_RENDERER) << std::endl << std::endl;
 
 	Dusk::Graphics::Mesh* m = Dusk::Graphics::ModelLoader::Load("C:\\Users\\sax\\Desktop\\Dusk Engine\\Dusk Engine\\x64\\Debug\\test.fbx", false);
 

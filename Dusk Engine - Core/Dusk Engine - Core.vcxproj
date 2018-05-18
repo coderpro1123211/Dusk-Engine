@@ -166,6 +166,7 @@
     <ClInclude Include="src\graphics\Mesh.h" />
     <ClInclude Include="src\graphics\ModelLoader.h" />
     <ClInclude Include="src\rendering\DeferredRenderer.h" />
+    <ClInclude Include="src\rendering\ShaderCompiler.h" />
     <ClInclude Include="src\rendering\UnlitRenderer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,7 @@
     <ClCompile Include="src\graphics\Mesh.cpp" />
     <ClCompile Include="src\graphics\ModelLoader.cpp" />
     <ClCompile Include="src\rendering\DeferredRenderer.cpp" />
+    <ClCompile Include="src\rendering\ShaderCompiler.cpp" />
     <ClCompile Include="src\rendering\UnlitRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
