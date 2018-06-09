@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{1A7F37BD-FE63-43DB-A38C-A8BD35F3AAC3}</ProjectGuid>
     <RootNamespace>DuskEngineCore</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="src\core\Logger.h" />
     <ClInclude Include="src\core\Window.h" />
+    <ClInclude Include="src\graphics\Graphics.h" />
     <ClInclude Include="src\graphics\Mesh.h" />
     <ClInclude Include="src\graphics\ModelLoader.h" />
     <ClInclude Include="src\rendering\DeferredRenderer.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\core\Logger.cpp" />
     <ClCompile Include="src\core\Window.cpp" />
+    <ClCompile Include="src\graphics\Graphics.cpp" />
     <ClCompile Include="src\graphics\Mesh.cpp" />
     <ClCompile Include="src\graphics\ModelLoader.cpp" />
     <ClCompile Include="src\rendering\DeferredRenderer.cpp" />

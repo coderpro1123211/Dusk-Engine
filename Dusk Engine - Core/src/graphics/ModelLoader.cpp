@@ -37,7 +37,8 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 	}
 
 	if (m == NULL) {
-		std::cout << "FATAL! " << std::endl;
+		LogError("Mesh \"%s\" not found! Did you place it in the output folder?", path);
+		return nullptr;
 	}
 
 	m->GenerateNormals();
