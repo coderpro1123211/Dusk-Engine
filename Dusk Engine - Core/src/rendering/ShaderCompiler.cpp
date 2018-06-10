@@ -21,7 +21,7 @@ GLuint Dusk::Rendering::ShaderCompiler::CompileShader(const char * src, GLenum t
 
 	const GLchar* s = ((GLchar*)src);
 
-	glShaderSource(shaderId, NULL, &s, NULL);
+	glShaderSource(shaderId, 1, &s, NULL);
 	glCompileShader(shaderId);
 
 	//Get the info about the shader
@@ -52,10 +52,8 @@ GLuint Dusk::Rendering::ShaderCompiler::LinkShaders(GLuint vertId, GLuint fragId
 	glAttachShader(program, vertId);
 	glAttachShader(program, fragId);
 
-	// Link our program
 	glLinkProgram(program);
 
-	// Note the different functions here: glGetProgram* instead of glGetShader*.
 	GLint isLinked = 0;
 	glGetProgramiv(program, GL_LINK_STATUS, (int *)&isLinked);
 	if (isLinked == GL_FALSE)
@@ -63,13 +61,11 @@ GLuint Dusk::Rendering::ShaderCompiler::LinkShaders(GLuint vertId, GLuint fragId
 		GLint maxLength = 0;
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
 
-		// The maxLength includes the NULL character
 		std::vector<GLchar> infoLog(maxLength);
 		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
 
-		// We don't need the program anymore.
 		glDeleteProgram(program);
-		// Don't leak shaders either.
+
 		glDeleteShader(vertId);
 		glDeleteShader(fragId);
 

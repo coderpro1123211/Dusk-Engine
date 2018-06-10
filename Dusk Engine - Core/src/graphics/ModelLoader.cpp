@@ -45,6 +45,7 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 
 	std::vector<glm::vec4> verts = std::vector<glm::vec4>();
 	std::vector<glm::vec4> normals = std::vector<glm::vec4>();
+	std::vector<int> indicies = std::vector<int>();
 
 	for (int iPoly = 0; iPoly < m->GetPolygonCount(); iPoly++) {
 		std::vector<FbxVector4> v = std::vector<FbxVector4>();
@@ -52,6 +53,7 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 		for (int iVert = 0; iVert < m->GetPolygonSize(iPoly); iVert++)
 		{
 			int index = m->GetPolygonVertex(iPoly, iVert);
+			indicies.push_back(index);
 			FbxVector4 vv = m->GetControlPointAt(index);
 			v.push_back(vv);
 			FbxVector4 nn;
@@ -71,5 +73,5 @@ Dusk::Graphics::Mesh* Dusk::Graphics::ModelLoader::Load(char *path, bool calcNor
 	}
 
 
-	return new Mesh(&verts[0], verts.size(), &normals[0], normals.size(), nullptr, NULL);
+	return new Mesh(verts, normals, indicies);
 }

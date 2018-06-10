@@ -83,5 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="src\vert.glsl" />
+    <None Include="src\frag.glsl" />
   </ItemGroup>
 </Project>

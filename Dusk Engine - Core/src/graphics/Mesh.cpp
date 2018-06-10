@@ -2,13 +2,16 @@
 #include "fbxsdk.h"
 #include "fbxsdk/fileio/fbxiosettings.h"
 #include <iostream>
+#include <vector>
 
-Dusk::Graphics::Mesh::Mesh(glm::vec4 * vert, int vertLen, glm::vec4 * nrm, int nrmLen, int * index, int indexLen)
+Dusk::Graphics::Mesh::Mesh(std::vector<glm::vec4> vert, std::vector<glm::vec4> nrm, std::vector<int> index)
 {
 	this->verts = vert;
-	this->vertsLen = vertLen;
 	this->normals = nrm;
-	this->normalsLen = nrmLen;
 	this->index = index;
-	this->indexLen = indexLen;
+}
+
+void Dusk::Graphics::Mesh::SetShader(GLuint prog)
+{
+	this->shaderProg = prog;
 }

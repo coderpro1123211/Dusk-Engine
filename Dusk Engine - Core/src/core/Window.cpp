@@ -2,6 +2,7 @@
 #include "GLFW/glfw3.h"
 #include "../graphics/Mesh.h"
 #include "../graphics/Graphics.h"
+#include "../rendering/UnlitRenderer.h"
 
 using namespace Dusk::Core;
 using namespace Dusk::Graphics;
@@ -25,7 +26,7 @@ void Dusk::Core::Window::Repaint(Mesh* meshes, int meshesLen)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//TODO: Render shit here
+	Dusk::Rendering::UnlitRenderer::Render(meshes, meshesLen);
 
 	glfwSwapBuffers(this->m_Window);
 }
