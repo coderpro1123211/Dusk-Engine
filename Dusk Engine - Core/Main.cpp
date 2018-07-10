@@ -10,16 +10,19 @@
 #include "src/graphics/Graphics.h"
 
 char* vertSrc = "\
+#version 330 core\n \
+layout(location = 0) in vec3 vert;\
 uniform mat4 DUSK_MATRIX_MVP;\
 \
 void main()\
 {\
-	gl_Position = DUSK_MATRIX_MVP * gl_Vertex;\
+	gl_Position = DUSK_MATRIX_MVP * vec4(vert, 1);\
 }\0";
 char* fragSrc = "\
-void main()\
-{\
-	gl_FragColor = vec4(0.4, 0.4, 0.8, 1.0);\
+#version 330 core\n\
+out vec3 color;\
+void main() {\
+	color = vec3(1, 0, 0);\
 }\
 \0";
 
@@ -59,6 +62,10 @@ int main() {
 	GLuint shader = Dusk::Rendering::ShaderCompiler::CompileFromSource(vertSrc, fragSrc);
 
 	m->SetShader(shader);
+
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 
 	while (!w->PollEvents()) {
 		w->Repaint(m, 1);

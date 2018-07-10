@@ -8,75 +8,42 @@
 
 using namespace Dusk::Graphics;
 
-typedef struct {
-	GLfloat pos[3];
-	GLfloat nrm[3];
-	GLubyte col[4];
-} vertData;
-
 void Dusk::Rendering::UnlitRenderer::Render(Mesh* meshes, int numMeshes)
 {
 	for (int i = 0; i < numMeshes; i++) {
 		Mesh m = meshes[i];
 
-		glm::mat4 proj = glm::perspective<float>(60, 800.0/600.0, 0, 100);
+		glm::mat4 proj = glm::perspective<float>(glm::radians(60.0f), 800.0/600.0, 0, 100);
 
-		glm::mat4 view;
-		glm::make_mat4(&view);
-		glm::translate(view, glm::vec3(0, 0, -10));
+		glm::mat4 view = glm::lookAt(
+			glm::vec3(4, 3, 3), // Camera is at (4,3,3), in World Space
+			glm::vec3(0, 0, 0), // and looks at the origin
+			glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+		);
 
-		glm::mat4 model;
-		glm::make_mat4(&model);
+		glm::mat4 model = glm::mat4(1.0f);
 		//glm::rotate<float>(model, 30, glm::vec3(0, 1, 0));
 
 		glm::mat4 mvp = proj * view * model;
 
 		GLuint shader = m.shaderProg;
-
 		glUseProgram(shader);
+
 		glUniformMatrix4fv(glGetUniformLocation(shader, "DUSK_MATRIX_MVP"), 1, false, &mvp[0][0]);
 
-		std::vector<vertData> arr;
-
-		for (int j = 0; j < m.verts.size(); j++)
-		{
-			vertData d;
-			memset(&d, 0, sizeof(vertData));
-
-			d.pos[0] = m.verts[j].x;
-			d.pos[1] = m.verts[j].y;
-			d.pos[2] = m.verts[j].z;
-
-			d.nrm[0] = m.normals[j].x;
-			d.nrm[1] = m.normals[j].y;
-			d.nrm[2] = m.normals[j].z;
-
-			d.col[0] = 1;
-			d.col[0] = 1;
-			d.col[0] = 1;
-			d.col[0] = 1;
-			
-			arr.push_back(d);
-		}
-
-		GLuint vBuf;
-
-		glGenVertexArrays(1, &vBuf);
-
-		glBindVertexBuffer(0, vBuf, 0, sizeof(vertData));
-		
 		glEnableVertexAttribArray(0);
-		glVertexAttribFormat(0, 3, GL_FLOAT, GL_FALSE, offsetof(vertData, pos));
-		glVertexAttribBinding(0, 0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribFormat(1, 3, GL_FLOAT, GL_FALSE, offsetof(vertData, nrm));
-		glVertexAttribBinding(1, 0);
-		glEnableVertexAttribArray(2);
-		glVertexAttribFormat(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, offsetof(vertData, col));
-		glVertexAttribBinding(2, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, m.vertBuffer);
+		glVertexAttribPointer(
+			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			7,                  // stride
+			(void*)0            // array buffer offset
+		);
 
-		
+		glDrawArrays(GL_TRIANGLES, 0, m.vertsLen);
+		glDisableVertexAttribArray(0);
 
-		glDrawArrays(GL_TRIANGLES, 0, 12*3);
 	}
 }

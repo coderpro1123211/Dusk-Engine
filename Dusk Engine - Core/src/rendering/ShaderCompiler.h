@@ -4,7 +4,7 @@
 
 namespace Dusk {
 	namespace Rendering {
-		static class ShaderCompiler {
+		class ShaderCompiler {
 		public:
 			static GLuint CompileFromSource(char* vert, char* frag);
 			static GLuint CompileShader(const char* src, GLenum type, char* id);

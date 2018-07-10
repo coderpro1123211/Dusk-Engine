@@ -5,6 +5,11 @@
 
 namespace Dusk {
 	namespace Graphics {
+		typedef struct {
+			GLfloat pos[3];
+			GLfloat nrm[3];
+			GLubyte col[4];
+		} VertexData;
 		class Mesh {
 		public:
 			Mesh(std::vector<glm::vec4> vert, std::vector<glm::vec4> nrm, std::vector<int> index);
@@ -16,6 +21,8 @@ namespace Dusk {
 			int indexLen;
 			int vertsLen;
 			int normalsLen;
+			std::vector<VertexData> vertData;
 			GLuint shaderProg;
+			GLuint vertBuffer;
 		};
 } }

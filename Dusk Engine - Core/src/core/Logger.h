@@ -3,7 +3,7 @@
 
 namespace Dusk {
 	namespace Core {
-		static class Logger {
+		class Logger {
 			static void Log(char* msg, char* func, int severity, va_list argptr);
 		public:
 			static void InternalLog(char* msg, char* func, ...);

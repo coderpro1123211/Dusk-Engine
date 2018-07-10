@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Dusk {
-	static class GraphicsLibrary {
+	class GraphicsLibrary {
 	public:
 		static bool Initialize();
 		static bool InitializeGLFW();
